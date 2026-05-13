@@ -1,0 +1,8 @@
+{
+  "name": "kezia-babu-counselling",
+  "version": "1.0.0",
+  "description": "Kezia Babu Counselling Psychology Website",
+  "dependencies": {
+    "stripe": "^14.0.0"
+  }
+}

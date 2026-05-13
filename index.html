@@ -1,0 +1,828 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Kezia Babu — Counselling Psychologist, Bangalore</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --rose: #f9e8ec;
+    --rose-mid: #e8a0b4;
+    --rose-deep: #c06080;
+    --sage: #e8f0e8;
+    --sage-mid: #8aad8a;
+    --sage-deep: #4a7a4a;
+    --peach: #fdf0e8;
+    --peach-mid: #e8b890;
+    --lavender: #ede8f9;
+    --lavender-mid: #a090d0;
+    --cream: #fdf8f2;
+    --warm-white: #fffcf8;
+    --text-dark: #2a1f1f;
+    --text-mid: #5a4040;
+    --text-light: #8a7070;
+    --serif: 'Cormorant Garamond', Georgia, serif;
+    --sans: 'DM Sans', system-ui, sans-serif;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { font-family: var(--sans); background: var(--warm-white); color: var(--text-dark); overflow-x: hidden; }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1.2rem 5vw;
+    background: rgba(253,248,242,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(192,96,128,0.12);
+  }
+  .nav-logo { font-family: var(--serif); font-size: 1.5rem; font-weight: 400; color: var(--text-dark); text-decoration: none; letter-spacing: 0.01em; }
+  .nav-links { display: flex; gap: 2rem; align-items: center; }
+  .nav-links a { font-size: 0.875rem; font-weight: 400; color: var(--text-mid); text-decoration: none; letter-spacing: 0.02em; transition: color 0.2s; }
+  .nav-links a:hover { color: var(--rose-deep); }
+  .btn-nav {
+    background: var(--rose-deep); color: white; border: none; padding: 0.6rem 1.4rem;
+    border-radius: 50px; font-family: var(--sans); font-size: 0.85rem; font-weight: 500;
+    cursor: pointer; transition: all 0.2s; letter-spacing: 0.02em;
+  }
+  .btn-nav:hover { background: #a04060; transform: translateY(-1px); }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh; display: flex; align-items: center;
+    background: linear-gradient(135deg, var(--rose) 0%, var(--peach) 40%, var(--lavender) 100%);
+    padding: 8rem 5vw 5rem;
+    position: relative; overflow: hidden;
+  }
+  .hero::before {
+    content: ''; position: absolute; top: -20%; right: -10%;
+    width: 60vw; height: 60vw; border-radius: 50%;
+    background: radial-gradient(circle, rgba(232,160,180,0.18) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero::after {
+    content: ''; position: absolute; bottom: -10%; left: -5%;
+    width: 40vw; height: 40vw; border-radius: 50%;
+    background: radial-gradient(circle, rgba(138,173,138,0.15) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero-inner { display: grid; grid-template-columns: 1fr 380px; gap: 4rem; align-items: center; max-width: 1200px; width: 100%; margin: 0 auto; position: relative; z-index: 1; }
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    background: rgba(192,96,128,0.1); border: 1px solid rgba(192,96,128,0.25);
+    color: var(--rose-deep); border-radius: 50px; padding: 0.35rem 1rem;
+    font-size: 0.8rem; font-weight: 500; letter-spacing: 0.05em;
+    margin-bottom: 1.5rem; text-transform: uppercase;
+  }
+  .hero-badge::before { content: '✦'; font-size: 0.6rem; }
+  .hero h1 {
+    font-family: var(--serif); font-size: clamp(2.8rem, 5vw, 4.2rem);
+    font-weight: 300; line-height: 1.15; color: var(--text-dark);
+    margin-bottom: 1.5rem; letter-spacing: -0.01em;
+  }
+  .hero h1 em { font-style: italic; color: var(--rose-deep); }
+  .hero-sub {
+    font-size: 1.05rem; color: var(--text-mid); line-height: 1.7;
+    max-width: 480px; margin-bottom: 2.5rem; font-weight: 300;
+  }
+  .hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; }
+  .btn-primary {
+    background: var(--rose-deep); color: white; border: none;
+    padding: 0.85rem 2rem; border-radius: 50px; font-family: var(--sans);
+    font-size: 0.95rem; font-weight: 500; cursor: pointer;
+    transition: all 0.25s; letter-spacing: 0.01em;
+  }
+  .btn-primary:hover { background: #a04060; transform: translateY(-2px); box-shadow: 0 8px 24px rgba(192,96,128,0.25); }
+  .btn-ghost {
+    background: transparent; color: var(--text-dark); cursor: pointer;
+    border: 1.5px solid rgba(42,31,31,0.2); padding: 0.85rem 2rem;
+    border-radius: 50px; font-family: var(--sans); font-size: 0.95rem;
+    font-weight: 400; transition: all 0.25s; letter-spacing: 0.01em;
+  }
+  .btn-ghost:hover { border-color: var(--rose-deep); color: var(--rose-deep); }
+
+  /* PROFILE CARD */
+  .profile-card {
+    background: rgba(255,255,255,0.75); backdrop-filter: blur(20px);
+    border: 1px solid rgba(192,96,128,0.15); border-radius: 24px;
+    padding: 2.5rem 2rem; text-align: center;
+    box-shadow: 0 20px 60px rgba(192,96,128,0.1);
+    animation: float 6s ease-in-out infinite;
+  }
+  @keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-10px)} }
+  .profile-avatar {
+    width: 100px; height: 100px; border-radius: 50%; margin: 0 auto 1.2rem;
+    background: linear-gradient(135deg, var(--rose-mid), var(--lavender-mid));
+    display: flex; align-items: center; justify-content: center;
+    font-family: var(--serif); font-size: 2.5rem; color: white; font-weight: 300;
+  }
+  .profile-card h3 { font-family: var(--serif); font-size: 1.5rem; font-weight: 400; margin-bottom: 0.3rem; }
+  .profile-card .title { font-size: 0.82rem; color: var(--rose-deep); font-weight: 500; letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 1rem; }
+  .profile-card blockquote { font-family: var(--serif); font-style: italic; font-size: 1rem; color: var(--text-mid); line-height: 1.6; margin-bottom: 1.5rem; }
+  .profile-stats { display: flex; flex-direction: column; gap: 0.6rem; }
+  .stat-item { display: flex; align-items: center; gap: 0.6rem; font-size: 0.82rem; color: var(--text-mid); }
+  .stat-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--sage-mid); flex-shrink: 0; }
+
+  /* SECTIONS */
+  section { padding: 6rem 5vw; }
+  .section-inner { max-width: 1200px; margin: 0 auto; }
+  .section-label { font-size: 0.78rem; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--rose-deep); margin-bottom: 0.8rem; }
+  .section-title { font-family: var(--serif); font-size: clamp(2rem, 3.5vw, 3rem); font-weight: 300; line-height: 1.2; color: var(--text-dark); margin-bottom: 1.5rem; }
+
+  /* ABOUT */
+  .about-section { background: var(--cream); }
+  .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; }
+  .about-visual {
+    position: relative;
+  }
+  .about-blob {
+    width: 100%; aspect-ratio: 1;
+    background: linear-gradient(135deg, var(--rose) 0%, var(--peach) 50%, var(--lavender) 100%);
+    border-radius: 60% 40% 50% 50% / 50% 50% 40% 60%;
+    display: flex; align-items: center; justify-content: center;
+    font-family: var(--serif); font-size: 6rem; color: var(--rose-mid);
+  }
+  .about-text p { font-size: 1rem; color: var(--text-mid); line-height: 1.85; margin-bottom: 1.2rem; font-weight: 300; }
+  .about-cred { display: inline-flex; align-items: center; gap: 0.6rem; background: var(--sage); border: 1px solid var(--sage-mid); border-radius: 8px; padding: 0.7rem 1rem; font-size: 0.85rem; color: var(--sage-deep); margin-bottom: 1.5rem; }
+  .tags { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1.5rem; }
+  .tag { background: white; border: 1px solid rgba(192,96,128,0.2); color: var(--rose-deep); border-radius: 50px; padding: 0.3rem 0.9rem; font-size: 0.8rem; font-weight: 400; }
+
+  /* SERVICES */
+  .services-section { background: var(--warm-white); }
+  .services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-top: 3rem; }
+  .service-card {
+    background: white; border: 1px solid rgba(192,96,128,0.1);
+    border-radius: 20px; padding: 2rem 1.8rem; position: relative; overflow: hidden;
+    transition: all 0.3s; cursor: default;
+  }
+  .service-card::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+    background: linear-gradient(90deg, var(--rose-mid), var(--lavender-mid));
+    opacity: 0; transition: opacity 0.3s;
+  }
+  .service-card:hover { transform: translateY(-4px); box-shadow: 0 16px 40px rgba(192,96,128,0.12); border-color: rgba(192,96,128,0.2); }
+  .service-card:hover::before { opacity: 1; }
+  .service-icon { font-size: 2rem; margin-bottom: 1rem; }
+  .service-card h3 { font-family: var(--serif); font-size: 1.25rem; font-weight: 400; margin-bottom: 0.7rem; color: var(--text-dark); }
+  .service-card p { font-size: 0.9rem; color: var(--text-light); line-height: 1.7; font-weight: 300; }
+
+  /* HOW IT WORKS */
+  .how-section { background: var(--rose); }
+  .steps-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; margin-top: 3rem; }
+  .step-card { text-align: center; padding: 2rem 1.5rem; }
+  .step-num { font-family: var(--serif); font-size: 3rem; font-weight: 300; color: rgba(192,96,128,0.25); line-height: 1; margin-bottom: 1rem; }
+  .step-card h4 { font-family: var(--serif); font-size: 1.15rem; font-weight: 400; color: var(--text-dark); margin-bottom: 0.7rem; }
+  .step-card p { font-size: 0.88rem; color: var(--text-mid); line-height: 1.7; font-weight: 300; }
+
+  /* WHY CHOOSE */
+  .why-section { background: var(--cream); }
+  .why-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
+  .why-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  .why-card { background: white; border: 1px solid rgba(192,96,128,0.1); border-radius: 16px; padding: 1.5rem; }
+  .why-card .icon { font-size: 1.5rem; margin-bottom: 0.7rem; }
+  .why-card h4 { font-family: var(--serif); font-size: 1.05rem; font-weight: 400; margin-bottom: 0.4rem; }
+  .why-card p { font-size: 0.85rem; color: var(--text-light); line-height: 1.6; font-weight: 300; }
+  .why-quote { font-family: var(--serif); font-size: 1.5rem; font-style: italic; line-height: 1.6; color: var(--text-dark); font-weight: 300; }
+  .why-quote cite { display: block; margin-top: 1rem; font-size: 0.85rem; font-style: normal; font-family: var(--sans); color: var(--rose-deep); font-weight: 500; }
+
+  /* FAQ */
+  .faq-section { background: var(--warm-white); }
+  .faq-list { margin-top: 3rem; max-width: 780px; }
+  .faq-item { border-bottom: 1px solid rgba(192,96,128,0.12); padding: 1.5rem 0; }
+  .faq-q { font-family: var(--serif); font-size: 1.1rem; font-weight: 400; color: var(--text-dark); cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 1rem; }
+  .faq-q span.arrow { font-size: 1.2rem; color: var(--rose-mid); transition: transform 0.3s; display: inline-block; }
+  .faq-q.open span.arrow { transform: rotate(45deg); }
+  .faq-a { font-size: 0.92rem; color: var(--text-mid); line-height: 1.75; font-weight: 300; max-height: 0; overflow: hidden; transition: max-height 0.4s ease, padding 0.3s; }
+  .faq-a.open { max-height: 200px; padding-top: 1rem; }
+
+  /* CONTACT */
+  .contact-section {
+    background: linear-gradient(135deg, var(--lavender) 0%, var(--rose) 100%);
+    text-align: center;
+  }
+  .contact-section .section-title { color: var(--text-dark); }
+  .contact-sub { font-size: 1rem; color: var(--text-mid); max-width: 500px; margin: 0 auto 2.5rem; line-height: 1.7; font-weight: 300; }
+  .contact-cards { display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; margin-bottom: 3rem; }
+  .contact-card { background: rgba(255,255,255,0.6); backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.8); border-radius: 14px; padding: 1rem 1.5rem; font-size: 0.88rem; color: var(--text-mid); }
+  .contact-card strong { display: block; color: var(--text-dark); font-weight: 500; margin-bottom: 0.2rem; font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.05em; }
+
+  /* FOOTER */
+  footer { background: var(--text-dark); color: rgba(255,255,255,0.5); text-align: center; padding: 2rem 5vw; font-size: 0.82rem; font-weight: 300; letter-spacing: 0.03em; }
+  footer span { color: rgba(255,255,255,0.8); }
+
+  /* BOOKING MODAL */
+  .modal-overlay {
+    position: fixed; inset: 0; z-index: 1000;
+    background: rgba(42,31,31,0.5); backdrop-filter: blur(6px);
+    display: flex; align-items: center; justify-content: center;
+    opacity: 0; pointer-events: none; transition: opacity 0.3s;
+    padding: 1rem;
+  }
+  .modal-overlay.open { opacity: 1; pointer-events: all; }
+  .modal {
+    background: white; border-radius: 24px; width: 100%; max-width: 540px;
+    max-height: 90vh; overflow-y: auto;
+    transform: translateY(20px) scale(0.97); transition: transform 0.3s;
+    box-shadow: 0 40px 80px rgba(42,31,31,0.2);
+  }
+  .modal-overlay.open .modal { transform: translateY(0) scale(1); }
+  .modal-header { padding: 2rem 2rem 1rem; border-bottom: 1px solid rgba(192,96,128,0.1); position: sticky; top: 0; background: white; z-index: 1; border-radius: 24px 24px 0 0; }
+  .modal-header h2 { font-family: var(--serif); font-size: 1.6rem; font-weight: 400; color: var(--text-dark); }
+  .modal-header p { font-size: 0.88rem; color: var(--text-light); margin-top: 0.3rem; font-weight: 300; }
+  .modal-close { position: absolute; top: 1.5rem; right: 1.5rem; background: none; border: none; font-size: 1.4rem; cursor: pointer; color: var(--text-light); line-height: 1; padding: 0.3rem; }
+  .modal-close:hover { color: var(--text-dark); }
+  .modal-body { padding: 1.5rem 2rem 2rem; }
+
+  /* STEPS */
+  .step-indicator { display: flex; gap: 0.5rem; margin-bottom: 2rem; }
+  .step-dot { flex: 1; height: 3px; border-radius: 3px; background: var(--rose); transition: background 0.3s; }
+  .step-dot.active { background: var(--rose-deep); }
+
+  /* FORM */
+  .form-group { margin-bottom: 1.2rem; }
+  label { display: block; font-size: 0.82rem; font-weight: 500; color: var(--text-mid); margin-bottom: 0.4rem; letter-spacing: 0.02em; }
+  input, select, textarea {
+    width: 100%; padding: 0.75rem 1rem; border: 1.5px solid rgba(192,96,128,0.2);
+    border-radius: 12px; font-family: var(--sans); font-size: 0.93rem; color: var(--text-dark);
+    background: white; transition: border-color 0.2s; outline: none;
+  }
+  input:focus, select:focus, textarea:focus { border-color: var(--rose-deep); }
+  textarea { resize: vertical; min-height: 80px; }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+
+  /* PRICING BOX */
+  .pricing-box { background: var(--rose); border-radius: 16px; padding: 1.5rem; margin-bottom: 1.5rem; }
+  .pricing-box h4 { font-family: var(--serif); font-size: 1.1rem; font-weight: 400; margin-bottom: 0.8rem; color: var(--text-dark); }
+  .pricing-option { display: flex; align-items: center; gap: 0.7rem; padding: 0.7rem 0; border-bottom: 1px solid rgba(192,96,128,0.15); cursor: pointer; }
+  .pricing-option:last-child { border-bottom: none; }
+  .pricing-option input[type="radio"] { accent-color: var(--rose-deep); width: 16px; height: 16px; flex-shrink: 0; }
+  .pricing-option label { margin: 0; cursor: pointer; flex: 1; display: flex; justify-content: space-between; align-items: center; }
+  .price-amount { font-weight: 500; color: var(--rose-deep); font-size: 0.95rem; }
+
+  /* STRIPE SECTION */
+  .stripe-section { background: var(--lavender); border-radius: 16px; padding: 1.5rem; margin-bottom: 1.5rem; }
+  .stripe-section h4 { font-family: var(--serif); font-size: 1.05rem; font-weight: 400; margin-bottom: 0.3rem; }
+  .stripe-section p { font-size: 0.82rem; color: var(--text-light); margin-bottom: 1rem; }
+  .stripe-badge { display: flex; align-items: center; gap: 0.5rem; font-size: 0.78rem; color: var(--sage-deep); background: var(--sage); border-radius: 8px; padding: 0.5rem 0.8rem; margin-top: 0.8rem; }
+  .card-mock { border: 1.5px solid rgba(160,144,208,0.3); border-radius: 12px; padding: 0.75rem 1rem; font-size: 0.9rem; color: var(--text-light); margin-bottom: 0.8rem; background: white; }
+
+  .summary-row { display: flex; justify-content: space-between; font-size: 0.9rem; color: var(--text-mid); margin-bottom: 0.5rem; }
+  .summary-total { display: flex; justify-content: space-between; font-weight: 500; font-size: 1rem; color: var(--text-dark); border-top: 1px solid rgba(192,96,128,0.15); padding-top: 0.8rem; margin-top: 0.5rem; }
+
+  /* SUCCESS */
+  .success-screen { text-align: center; padding: 2rem 1rem; }
+  .success-icon { font-size: 4rem; margin-bottom: 1rem; }
+  .success-screen h3 { font-family: var(--serif); font-size: 1.8rem; font-weight: 300; margin-bottom: 0.8rem; color: var(--text-dark); }
+  .success-screen p { font-size: 0.92rem; color: var(--text-mid); line-height: 1.7; max-width: 380px; margin: 0 auto 1.5rem; font-weight: 300; }
+  .confirmation-details { background: var(--sage); border-radius: 14px; padding: 1.2rem 1.5rem; text-align: left; max-width: 380px; margin: 0 auto; }
+  .confirmation-details .det { font-size: 0.85rem; color: var(--sage-deep); margin-bottom: 0.4rem; }
+  .confirmation-details .det strong { display: inline-block; min-width: 90px; color: var(--text-mid); font-weight: 400; }
+
+  @keyframes fadeIn { from{opacity:0;transform:translateY(8px)} to{opacity:1;transform:none} }
+  .animate-in { animation: fadeIn 0.5s ease both; }
+
+  /* Navbar hamburger mobile */
+  .nav-toggle { display: none; background: none; border: none; cursor: pointer; font-size: 1.4rem; color: var(--text-dark); }
+
+  @media (max-width: 900px) {
+    .hero-inner { grid-template-columns: 1fr; }
+    .profile-card { max-width: 360px; margin: 0 auto; }
+    .about-grid, .why-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+    .services-grid { grid-template-columns: 1fr 1fr; }
+    .steps-grid { grid-template-columns: 1fr 1fr; }
+    .about-blob { max-width: 280px; margin: 0 auto; }
+    .nav-links { display: none; }
+    .nav-toggle { display: block; }
+  }
+  @media (max-width: 600px) {
+    .services-grid, .why-cards { grid-template-columns: 1fr; }
+    .steps-grid { grid-template-columns: 1fr; }
+    .form-row { grid-template-columns: 1fr; }
+    .modal { border-radius: 20px 20px 0 0; max-height: 95vh; }
+    .modal-overlay { align-items: flex-end; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">Kezia Babu</a>
+  <div class="nav-links">
+    <a href="#about">About</a>
+    <a href="#services">Services</a>
+    <a href="#how">How It Works</a>
+    <a href="#faq">FAQs</a>
+    <button class="btn-nav" onclick="openModal()">Book a Session</button>
+  </div>
+  <button class="nav-toggle" onclick="toggleMobileNav()" aria-label="Menu">☰</button>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-inner">
+    <div class="hero-text animate-in">
+      <div class="hero-badge">Individual Counselling — Bangalore</div>
+      <h1>You don't have to<br><em>carry it all alone.</em></h1>
+      <p class="hero-sub">A safe, non-judgmental space to understand yourself, heal at your own pace, and rediscover your inner strength.</p>
+      <div class="hero-btns">
+        <button class="btn-primary" onclick="openModal()">Book a Free Consultation</button>
+        <button class="btn-ghost" onclick="document.getElementById('about').scrollIntoView({behavior:'smooth'})">Learn More</button>
+      </div>
+    </div>
+    <div class="profile-card animate-in" style="animation-delay:0.15s">
+      <div class="profile-avatar">KB</div>
+      <h3>Kezia Babu</h3>
+      <div class="title">MSc Counselling Psychology</div>
+      <blockquote>"Healing is not linear — and that is perfectly okay."</blockquote>
+      <div class="profile-stats">
+        <div class="stat-item"><span class="stat-dot"></span> 100% Confidential</div>
+        <div class="stat-item"><span class="stat-dot"></span> 1:1 Personal Sessions</div>
+        <div class="stat-item"><span class="stat-dot"></span> Online &amp; In-person</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="about-section" id="about">
+  <div class="section-inner about-grid">
+    <div class="about-visual">
+      <div class="about-blob">🌸</div>
+    </div>
+    <div class="about-text">
+      <div class="section-label">About Me</div>
+      <h2 class="section-title">Hi, I'm <em style="font-style:italic;color:var(--rose-deep)">Kezia.</em></h2>
+      <div class="about-cred">🎓 MSc in Counselling Psychology · Bangalore, India</div>
+      <p>I'm a counselling psychologist based in Bangalore, and I truly believe that every person holds within them the capacity for growth, resilience, and healing — sometimes we just need a little support to find it.</p>
+      <p>My approach is warm, collaborative, and deeply personal. I draw from evidence-based methods including Cognitive Behavioural Therapy (CBT), mindfulness, and person-centred therapy — adapting each session to your unique needs, not a one-size-fits-all formula.</p>
+      <p>Whether you're dealing with anxiety, navigating a difficult life transition, or simply feeling stuck — I'm here to walk alongside you, at your pace.</p>
+      <div class="tags">
+        <span class="tag">Anxiety &amp; Stress</span>
+        <span class="tag">Depression</span>
+        <span class="tag">Self-esteem</span>
+        <span class="tag">Life transitions</span>
+        <span class="tag">Grief &amp; loss</span>
+        <span class="tag">Emotional regulation</span>
+        <span class="tag">Identity &amp; purpose</span>
+        <span class="tag">Workplace stress</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="services-section" id="services">
+  <div class="section-inner">
+    <div class="section-label">What I Offer</div>
+    <h2 class="section-title">Services</h2>
+    <div class="services-grid">
+      <div class="service-card">
+        <div class="service-icon">🌿</div>
+        <h3>Individual Therapy</h3>
+        <p>One-on-one sessions focused on your personal challenges, emotional wellbeing, and growth. A space that is entirely yours, free of judgment.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">🌊</div>
+        <h3>Anxiety &amp; Stress Management</h3>
+        <p>Learn practical, evidence-based tools to understand your anxiety, reduce overwhelm, and build calm into your everyday life.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">🪷</div>
+        <h3>Self-Esteem &amp; Identity</h3>
+        <p>Explore who you are beneath the noise. Work through self-doubt, people-pleasing, and build a more grounded sense of self.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">🌤️</div>
+        <h3>Life Transitions</h3>
+        <p>Career changes, relationship shifts, loss, or new beginnings — I help you navigate uncertainty and find solid ground again.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">🕊️</div>
+        <h3>Grief &amp; Emotional Healing</h3>
+        <p>Grief takes many forms. Together, we create space to honour your loss and gently move toward healing without rushing the process.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">💻</div>
+        <h3>Online Counselling</h3>
+        <p>Access support from the comfort of your home. Sessions conducted via secure video call — just as personal, just as effective.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="how-section" id="how">
+  <div class="section-inner">
+    <div class="section-label">The Process</div>
+    <h2 class="section-title">How It Works</h2>
+    <div class="steps-grid">
+      <div class="step-card">
+        <div class="step-num">01</div>
+        <h4>Reach Out</h4>
+        <p>Send a message or fill out the contact form. No pressure, no commitment — just a conversation.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-num">02</div>
+        <h4>Free Consultation</h4>
+        <p>A complimentary 10-minute call so we can understand your needs and see if we're a good fit.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-num">03</div>
+        <h4>Begin Sessions</h4>
+        <p>We set goals together and begin regular sessions — weekly or fortnightly, in-person or online.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-num">04</div>
+        <h4>Grow &amp; Heal</h4>
+        <p>At your own pace, you develop tools, insights, and confidence to navigate life with greater ease.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY CHOOSE -->
+<section class="why-section">
+  <div class="section-inner why-grid">
+    <div>
+      <div class="section-label">Why Kezia</div>
+      <h2 class="section-title">Why Choose Me</h2>
+      <div class="why-cards">
+        <div class="why-card">
+          <div class="icon">🎓</div>
+          <h4>Qualified &amp; Trained</h4>
+          <p>MSc in Counselling Psychology with structured training in CBT, mindfulness, and person-centred therapy.</p>
+        </div>
+        <div class="why-card">
+          <div class="icon">🤍</div>
+          <h4>Truly Non-Judgmental</h4>
+          <p>Whatever you bring — there is no shame here. You are accepted exactly as you are.</p>
+        </div>
+        <div class="why-card">
+          <div class="icon">🔒</div>
+          <h4>Completely Confidential</h4>
+          <p>Everything shared stays between us. Your privacy is a non-negotiable priority.</p>
+        </div>
+        <div class="why-card">
+          <div class="icon">📅</div>
+          <h4>Flexible Scheduling</h4>
+          <p>Sessions available on weekdays and weekends to fit around your life, not the other way around.</p>
+        </div>
+      </div>
+    </div>
+    <div>
+      <blockquote class="why-quote">
+        "You are not broken. You are not too much. You are a human being doing your best — and that is always enough to begin."
+        <cite>— Kezia Babu, Counselling Psychologist</cite>
+      </blockquote>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq-section" id="faq">
+  <div class="section-inner">
+    <div class="section-label">Questions</div>
+    <h2 class="section-title">FAQs</h2>
+    <div class="faq-list">
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">What happens in the first session? <span class="arrow">+</span></div>
+        <div class="faq-a">The first session is about getting to know each other. I'll ask about what's been on your mind, what brought you here, and what you're hoping to gain. There's no pressure to share everything at once — we go at your pace.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">How long does therapy usually take? <span class="arrow">+</span></div>
+        <div class="faq-a">It depends on your goals and what you're working through. Some people find 6–8 sessions helpful; others prefer ongoing support over a longer period. We'll review progress together regularly.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">Is everything I share kept confidential? <span class="arrow">+</span></div>
+        <div class="faq-a">Yes, absolutely. Confidentiality is a cornerstone of our work together. The only exceptions are rare legal or ethical situations where safety is at risk — which I'll always explain clearly from the start.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">Do you offer online sessions? <span class="arrow">+</span></div>
+        <div class="faq-a">Yes! I offer online sessions via secure video call — so you can choose whatever feels most comfortable for you.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">I'm nervous about starting. Is that normal? <span class="arrow">+</span></div>
+        <div class="faq-a">Completely. Most people feel a little anxious before their first session — that's a very human response. My role is to make you feel safe and at ease from the very first moment.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact-section" id="contact">
+  <div class="section-inner">
+    <div class="section-label" style="color:var(--rose-deep)">Get In Touch</div>
+    <h2 class="section-title">Ready to take that first step?</h2>
+    <p class="contact-sub">Reaching out is the bravest thing you can do. I'd love to hear from you — no question is too small.</p>
+    <div class="contact-cards">
+      <div class="contact-card"><strong>Location</strong>Bangalore, India</div>
+      <div class="contact-card"><strong>Sessions</strong>Online &amp; In-person</div>
+      <div class="contact-card"><strong>Free Consultation</strong>10-minute call</div>
+    </div>
+    <button class="btn-primary" onclick="openModal()">Book Your Free Consultation</button>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <span>Kezia Babu</span> · MSc Counselling Psychology · Bangalore · © 2026 · All sessions are strictly confidential
+</footer>
+
+<!-- BOOKING MODAL -->
+<div class="modal-overlay" id="bookingModal" onclick="closeModalOutside(event)">
+  <div class="modal" id="modalBox">
+    <div class="modal-header">
+      <h2 id="modalTitle">Book a Session</h2>
+      <p id="modalSubtitle">Fill in your details to get started</p>
+      <button class="modal-close" onclick="closeModal()">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="step-indicator">
+        <div class="step-dot active" id="dot1"></div>
+        <div class="step-dot" id="dot2"></div>
+        <div class="step-dot" id="dot3"></div>
+      </div>
+      <div id="step1">
+        <div class="form-row">
+          <div class="form-group">
+            <label>First Name</label>
+            <input type="text" id="fname" placeholder="Your name" />
+          </div>
+          <div class="form-group">
+            <label>Last Name</label>
+            <input type="text" id="lname" placeholder="Last name" />
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Email Address</label>
+          <input type="email" id="email" placeholder="you@email.com" />
+        </div>
+        <div class="form-group">
+          <label>Phone Number</label>
+          <input type="tel" id="phone" placeholder="+91 XXXXX XXXXX" />
+        </div>
+        <div class="form-group">
+          <label>Session Type</label>
+          <select id="sessionType">
+            <option value="">Select session type...</option>
+            <option value="free">Free 10-min Consultation</option>
+            <option value="individual">Individual Therapy (50 min)</option>
+            <option value="anxiety">Anxiety &amp; Stress Management</option>
+            <option value="selfesteem">Self-Esteem &amp; Identity</option>
+            <option value="grief">Grief &amp; Emotional Healing</option>
+          </select>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Preferred Date</label>
+            <input type="date" id="prefDate" />
+          </div>
+          <div class="form-group">
+            <label>Preferred Time</label>
+            <select id="prefTime">
+              <option value="">Select time...</option>
+              <option>9:00 AM</option><option>10:00 AM</option><option>11:00 AM</option>
+              <option>12:00 PM</option><option>2:00 PM</option><option>3:00 PM</option>
+              <option>4:00 PM</option><option>5:00 PM</option><option>6:00 PM</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Format</label>
+          <select id="format">
+            <option value="">Select format...</option>
+            <option>Online (Video Call)</option>
+            <option>In-person (Bangalore)</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Anything you'd like me to know? <span style="color:var(--text-light);font-weight:300">(optional)</span></label>
+          <textarea id="notes" placeholder="Share a little about what brought you here..."></textarea>
+        </div>
+        <button class="btn-primary" style="width:100%;justify-content:center" onclick="goToStep2()">Continue to Payment →</button>
+      </div>
+
+      <div id="step2" style="display:none">
+        <div class="pricing-box">
+          <h4>Select Your Session</h4>
+          <div class="pricing-option">
+            <input type="radio" name="plan" id="p1" value="free" onchange="updatePrice(this)" />
+            <label for="p1">Free Consultation (10 min) <span class="price-amount">₹0</span></label>
+          </div>
+          <div class="pricing-option">
+            <input type="radio" name="plan" id="p2" value="1200" onchange="updatePrice(this)" checked />
+            <label for="p2">Individual Session (50 min) <span class="price-amount">₹1,200</span></label>
+          </div>
+          <div class="pricing-option">
+            <input type="radio" name="plan" id="p3" value="3000" onchange="updatePrice(this)" />
+            <label for="p3">4-Session Package <span class="price-amount">₹3,000</span></label>
+          </div>
+          <div class="pricing-option">
+            <input type="radio" name="plan" id="p4" value="5500" onchange="updatePrice(this)" />
+            <label for="p4">8-Session Package <span class="price-amount">₹5,500</span></label>
+          </div>
+        </div>
+
+        <div class="stripe-section">
+          <h4>Secure Payment</h4>
+          <p>Your payment is processed securely via Stripe. Card details are never stored.</p>
+          <div class="card-mock" id="stripe-card-element">
+            <!-- Stripe Elements mounts here -->
+            <span style="color:var(--text-light);font-size:0.85rem">💳 Card number · MM/YY · CVC</span>
+          </div>
+          <div class="stripe-badge">🔒 Secured by Stripe · 256-bit SSL encryption</div>
+        </div>
+
+        <div style="margin-bottom:1.5rem">
+          <div class="summary-row"><span>Session</span><span id="sum-session">Individual (50 min)</span></div>
+          <div class="summary-row"><span>Date</span><span id="sum-date">—</span></div>
+          <div class="summary-row"><span>Format</span><span id="sum-format">—</span></div>
+          <div class="summary-total"><span>Total</span><span id="sum-total">₹1,200</span></div>
+        </div>
+
+        <div style="display:flex;gap:0.8rem">
+          <button class="btn-ghost" style="flex:1" onclick="goToStep1()">← Back</button>
+          <button class="btn-primary" style="flex:2" onclick="processPayment()" id="payBtn">Pay &amp; Confirm →</button>
+        </div>
+        <p style="font-size:0.78rem;color:var(--text-light);text-align:center;margin-top:0.8rem">By proceeding you agree to the cancellation &amp; refund policy. Sessions cancelled 24h+ in advance are fully refunded.</p>
+      </div>
+
+      <div id="step3" style="display:none">
+        <div class="success-screen">
+          <div class="success-icon">🌸</div>
+          <h3>You're all booked!</h3>
+          <p>Thank you for taking this brave step. Kezia will reach out within 24 hours to confirm your session details.</p>
+          <div class="confirmation-details">
+            <div class="det"><strong>Name</strong> <span id="conf-name">—</span></div>
+            <div class="det"><strong>Session</strong> <span id="conf-session">—</span></div>
+            <div class="det"><strong>Date</strong> <span id="conf-date">—</span></div>
+            <div class="det"><strong>Format</strong> <span id="conf-format">—</span></div>
+            <div class="det"><strong>Paid</strong> <span id="conf-amount">—</span></div>
+          </div>
+          <button class="btn-ghost" style="margin-top:1.5rem" onclick="closeModal()">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  // Stripe integration
+  // ⚠️  IMPORTANT: Replace 'pk_test_XXXX' with Kezia's real Stripe publishable key
+  const STRIPE_KEY = 'pk_test_REPLACE_WITH_KEZIA_STRIPE_KEY';
+  let stripe, cardElement;
+
+  function initStripe() {
+    if (typeof Stripe !== 'undefined' && STRIPE_KEY !== 'pk_test_REPLACE_WITH_KEZIA_STRIPE_KEY') {
+      stripe = Stripe(STRIPE_KEY);
+      const elements = stripe.elements();
+      cardElement = elements.create('card', {
+        style: {
+          base: {
+            fontFamily: "'DM Sans', sans-serif",
+            fontSize: '15px',
+            color: '#2a1f1f',
+            '::placeholder': { color: '#8a7070' }
+          }
+        }
+      });
+      cardElement.mount('#stripe-card-element');
+    } else {
+      // Demo mode — show mock card UI
+      document.getElementById('stripe-card-element').innerHTML =
+        '<input type="text" placeholder="4242 4242 4242 4242" style="border:none;outline:none;width:60%;font-size:0.9rem;" />' +
+        '<input type="text" placeholder="MM/YY" style="border:none;outline:none;width:15%;font-size:0.9rem;margin-left:8px;" />' +
+        '<input type="text" placeholder="CVC" style="border:none;outline:none;width:12%;font-size:0.9rem;margin-left:8px;" />';
+    }
+  }
+
+  // Modal open/close
+  function openModal() {
+    document.getElementById('bookingModal').classList.add('open');
+    document.body.style.overflow = 'hidden';
+    initStripe();
+    // Set min date to today
+    const today = new Date().toISOString().split('T')[0];
+    document.getElementById('prefDate').min = today;
+  }
+  function closeModal() {
+    document.getElementById('bookingModal').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+  function closeModalOutside(e) {
+    if (e.target === document.getElementById('bookingModal')) closeModal();
+  }
+
+  // Step navigation
+  function goToStep2() {
+    const fname = document.getElementById('fname').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const session = document.getElementById('sessionType').value;
+    if (!fname || !email || !session) {
+      alert('Please fill in your name, email, and session type to continue.');
+      return;
+    }
+    // Populate summary
+    document.getElementById('sum-date').textContent = document.getElementById('prefDate').value || 'To be confirmed';
+    document.getElementById('sum-format').textContent = document.getElementById('format').value || 'To be confirmed';
+    showStep(2);
+  }
+
+  function goToStep1() { showStep(1); }
+
+  function showStep(n) {
+    [1,2,3].forEach(i => {
+      document.getElementById('step'+i).style.display = i===n ? 'block' : 'none';
+      document.getElementById('dot'+i).classList.toggle('active', i<=n);
+    });
+    const titles = ['', 'Book a Session', 'Secure Payment', 'Booking Confirmed'];
+    const subs = ['', 'Fill in your details to get started', 'Complete your booking with secure payment', 'See you soon!'];
+    document.getElementById('modalTitle').textContent = titles[n];
+    document.getElementById('modalSubtitle').textContent = subs[n];
+  }
+
+  // Pricing
+  let selectedAmount = 1200;
+  const sessionNames = { free:'Free Consultation (10 min)', 1200:'Individual Session (50 min)', 3000:'4-Session Package', 5500:'8-Session Package' };
+
+  function updatePrice(radio) {
+    selectedAmount = radio.value === 'free' ? 0 : parseInt(radio.value);
+    const name = sessionNames[radio.value] || sessionNames[selectedAmount];
+    document.getElementById('sum-session').textContent = name;
+    document.getElementById('sum-total').textContent = selectedAmount === 0 ? 'Free' : '₹'+selectedAmount.toLocaleString('en-IN');
+  }
+
+  // Payment processing
+  async function processPayment() {
+    const btn = document.getElementById('payBtn');
+    btn.textContent = 'Processing...';
+    btn.disabled = true;
+
+    try {
+      if (stripe && cardElement && STRIPE_KEY !== 'pk_test_REPLACE_WITH_KEZIA_STRIPE_KEY' && selectedAmount > 0) {
+        // Real Stripe flow: create PaymentIntent via your backend
+        const res = await fetch('/api/create-payment-intent', {
+          method: 'POST',
+          headers: {'Content-Type':'application/json'},
+          body: JSON.stringify({ amount: selectedAmount * 100, currency: 'inr' })
+        });
+        const { clientSecret } = await res.json();
+        const result = await stripe.confirmCardPayment(clientSecret, {
+          payment_method: { card: cardElement }
+        });
+        if (result.error) {
+          alert(result.error.message);
+          btn.textContent = 'Pay & Confirm →';
+          btn.disabled = false;
+          return;
+        }
+      } else {
+        // Demo mode — simulate payment delay
+        await new Promise(r => setTimeout(r, 1800));
+      }
+
+      // Populate confirmation
+      const fname = document.getElementById('fname').value;
+      const lname = document.getElementById('lname').value;
+      document.getElementById('conf-name').textContent = fname + ' ' + lname;
+      document.getElementById('conf-session').textContent = document.getElementById('sum-session').textContent;
+      document.getElementById('conf-date').textContent = document.getElementById('prefDate').value || 'To be confirmed';
+      document.getElementById('conf-format').textContent = document.getElementById('format').value || 'To be confirmed';
+      document.getElementById('conf-amount').textContent = selectedAmount === 0 ? 'Free' : '₹'+selectedAmount.toLocaleString('en-IN');
+      showStep(3);
+    } catch(err) {
+      alert('Payment failed. Please try again.');
+      btn.textContent = 'Pay & Confirm →';
+      btn.disabled = false;
+    }
+  }
+
+  // FAQ accordion
+  function toggleFaq(el) {
+    const answer = el.nextElementSibling;
+    const isOpen = answer.classList.contains('open');
+    document.querySelectorAll('.faq-a.open').forEach(a => a.classList.remove('open'));
+    document.querySelectorAll('.faq-q.open').forEach(q => q.classList.remove('open'));
+    if (!isOpen) { answer.classList.add('open'); el.classList.add('open'); }
+  }
+
+  // Mobile nav
+  function toggleMobileNav() {
+    const links = document.querySelector('.nav-links');
+    if (links.style.display === 'flex') {
+      links.style.display = 'none';
+    } else {
+      links.style.cssText = 'display:flex;flex-direction:column;position:fixed;top:70px;left:0;right:0;background:rgba(253,248,242,0.98);padding:1.5rem 5vw;gap:1rem;z-index:99;border-bottom:1px solid rgba(192,96,128,0.1)';
+    }
+  }
+
+  // Load Stripe.js
+  const stripeScript = document.createElement('script');
+  stripeScript.src = 'https://js.stripe.com/v3/';
+  document.head.appendChild(stripeScript);
+</script>
+</body>
+</html>
