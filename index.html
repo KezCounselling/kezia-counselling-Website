@@ -627,13 +627,16 @@
         </div>
 
         <div class="stripe-section">
-          <h4>Secure Payment</h4>
-          <p>Your payment is processed securely via Stripe. Card details are never stored.</p>
-          <div class="card-mock" id="stripe-card-element">
-            <!-- Stripe Elements mounts here -->
-            <span style="color:var(--text-light);font-size:0.85rem">💳 Card number · MM/YY · CVC</span>
+          <h4>Secure Payment via Razorpay</h4>
+          <p>Pay securely using UPI, GPay, PhonePe, Cards, or NetBanking. You'll be redirected to Razorpay's secure checkout.</p>
+          <div style="display:flex;flex-wrap:wrap;gap:0.5rem;margin-bottom:0.8rem;">
+            <span style="background:white;border:1px solid rgba(160,144,208,0.25);border-radius:8px;padding:0.35rem 0.7rem;font-size:0.78rem;color:var(--text-mid);">💳 Cards</span>
+            <span style="background:white;border:1px solid rgba(160,144,208,0.25);border-radius:8px;padding:0.35rem 0.7rem;font-size:0.78rem;color:var(--text-mid);">📱 UPI</span>
+            <span style="background:white;border:1px solid rgba(160,144,208,0.25);border-radius:8px;padding:0.35rem 0.7rem;font-size:0.78rem;color:var(--text-mid);">G Pay</span>
+            <span style="background:white;border:1px solid rgba(160,144,208,0.25);border-radius:8px;padding:0.35rem 0.7rem;font-size:0.78rem;color:var(--text-mid);">PhonePe</span>
+            <span style="background:white;border:1px solid rgba(160,144,208,0.25);border-radius:8px;padding:0.35rem 0.7rem;font-size:0.78rem;color:var(--text-mid);">🏦 NetBanking</span>
           </div>
-          <div class="stripe-badge">🔒 Secured by Stripe · 256-bit SSL encryption</div>
+          <div class="stripe-badge">🔒 Secured by Razorpay · 256-bit SSL encryption</div>
         </div>
 
         <div style="margin-bottom:1.5rem">
@@ -669,42 +672,15 @@
   </div>
 </div>
 
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
 <script>
-  // Stripe integration
-  // ⚠️  IMPORTANT: Replace 'pk_test_XXXX' with Kezia's real Stripe publishable key
-  const STRIPE_KEY = 'pk_test_REPLACE_WITH_KEZIA_STRIPE_KEY';
-  let stripe, cardElement;
-
-  function initStripe() {
-    if (typeof Stripe !== 'undefined' && STRIPE_KEY !== 'pk_test_REPLACE_WITH_KEZIA_STRIPE_KEY') {
-      stripe = Stripe(STRIPE_KEY);
-      const elements = stripe.elements();
-      cardElement = elements.create('card', {
-        style: {
-          base: {
-            fontFamily: "'DM Sans', sans-serif",
-            fontSize: '15px',
-            color: '#2a1f1f',
-            '::placeholder': { color: '#8a7070' }
-          }
-        }
-      });
-      cardElement.mount('#stripe-card-element');
-    } else {
-      // Demo mode — show mock card UI
-      document.getElementById('stripe-card-element').innerHTML =
-        '<input type="text" placeholder="4242 4242 4242 4242" style="border:none;outline:none;width:60%;font-size:0.9rem;" />' +
-        '<input type="text" placeholder="MM/YY" style="border:none;outline:none;width:15%;font-size:0.9rem;margin-left:8px;" />' +
-        '<input type="text" placeholder="CVC" style="border:none;outline:none;width:12%;font-size:0.9rem;margin-left:8px;" />';
-    }
-  }
+  // Razorpay Key ID (public — safe to be here)
+  const RAZORPAY_KEY_ID = 'rzp_test_SogRZP157ociEp';
 
   // Modal open/close
   function openModal() {
     document.getElementById('bookingModal').classList.add('open');
     document.body.style.overflow = 'hidden';
-    initStripe();
-    // Set min date to today
     const today = new Date().toISOString().split('T')[0];
     document.getElementById('prefDate').min = today;
   }
@@ -725,7 +701,6 @@
       alert('Please fill in your name, email, and session type to continue.');
       return;
     }
-    // Populate summary
     document.getElementById('sum-date').textContent = document.getElementById('prefDate').value || 'To be confirmed';
     document.getElementById('sum-format').textContent = document.getElementById('format').value || 'To be confirmed';
     showStep(2);
@@ -755,49 +730,67 @@
     document.getElementById('sum-total').textContent = selectedAmount === 0 ? 'Free' : '₹'+selectedAmount.toLocaleString('en-IN');
   }
 
-  // Payment processing
-  async function processPayment() {
-    const btn = document.getElementById('payBtn');
-    btn.textContent = 'Processing...';
-    btn.disabled = true;
+  // Show confirmation after payment
+  function showConfirmation(paymentId) {
+    const fname = document.getElementById('fname').value;
+    const lname = document.getElementById('lname').value;
+    document.getElementById('conf-name').textContent = fname + ' ' + lname;
+    document.getElementById('conf-session').textContent = document.getElementById('sum-session').textContent;
+    document.getElementById('conf-date').textContent = document.getElementById('prefDate').value || 'To be confirmed';
+    document.getElementById('conf-format').textContent = document.getElementById('format').value || 'To be confirmed';
+    document.getElementById('conf-amount').textContent = selectedAmount === 0 ? 'Free' : '₹'+selectedAmount.toLocaleString('en-IN');
+    showStep(3);
+  }
 
-    try {
-      if (stripe && cardElement && STRIPE_KEY !== 'pk_test_REPLACE_WITH_KEZIA_STRIPE_KEY' && selectedAmount > 0) {
-        // Real Stripe flow: create PaymentIntent via your backend
-        const res = await fetch('/api/create-payment-intent', {
-          method: 'POST',
-          headers: {'Content-Type':'application/json'},
-          body: JSON.stringify({ amount: selectedAmount * 100, currency: 'inr' })
-        });
-        const { clientSecret } = await res.json();
-        const result = await stripe.confirmCardPayment(clientSecret, {
-          payment_method: { card: cardElement }
-        });
-        if (result.error) {
-          alert(result.error.message);
-          btn.textContent = 'Pay & Confirm →';
-          btn.disabled = false;
-          return;
-        }
-      } else {
-        // Demo mode — simulate payment delay
-        await new Promise(r => setTimeout(r, 1800));
-      }
+  // Razorpay payment
+  function processPayment() {
+    const fname = document.getElementById('fname').value.trim();
+    const lname = document.getElementById('lname').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const phone = document.getElementById('phone').value.trim();
 
-      // Populate confirmation
-      const fname = document.getElementById('fname').value;
-      const lname = document.getElementById('lname').value;
-      document.getElementById('conf-name').textContent = fname + ' ' + lname;
-      document.getElementById('conf-session').textContent = document.getElementById('sum-session').textContent;
-      document.getElementById('conf-date').textContent = document.getElementById('prefDate').value || 'To be confirmed';
-      document.getElementById('conf-format').textContent = document.getElementById('format').value || 'To be confirmed';
-      document.getElementById('conf-amount').textContent = selectedAmount === 0 ? 'Free' : '₹'+selectedAmount.toLocaleString('en-IN');
-      showStep(3);
-    } catch(err) {
-      alert('Payment failed. Please try again.');
-      btn.textContent = 'Pay & Confirm →';
-      btn.disabled = false;
+    // Free consultation — skip payment
+    if (selectedAmount === 0) {
+      showConfirmation('free');
+      return;
     }
+
+    const options = {
+      key: RAZORPAY_KEY_ID,
+      amount: selectedAmount * 100, // paise
+      currency: 'INR',
+      name: 'Kezia Babu Counselling',
+      description: document.getElementById('sum-session').textContent,
+      image: '',
+      prefill: {
+        name: fname + ' ' + lname,
+        email: email,
+        contact: phone
+      },
+      notes: {
+        session: document.getElementById('sum-session').textContent,
+        date: document.getElementById('prefDate').value,
+        format: document.getElementById('format').value
+      },
+      theme: {
+        color: '#c06080'
+      },
+      handler: function(response) {
+        // Payment successful
+        showConfirmation(response.razorpay_payment_id);
+      },
+      modal: {
+        ondismiss: function() {
+          // User closed Razorpay without paying — do nothing
+        }
+      }
+    };
+
+    const rzp = new Razorpay(options);
+    rzp.on('payment.failed', function(response) {
+      alert('Payment failed: ' + response.error.description + '. Please try again.');
+    });
+    rzp.open();
   }
 
   // FAQ accordion
@@ -818,11 +811,6 @@
       links.style.cssText = 'display:flex;flex-direction:column;position:fixed;top:70px;left:0;right:0;background:rgba(253,248,242,0.98);padding:1.5rem 5vw;gap:1rem;z-index:99;border-bottom:1px solid rgba(192,96,128,0.1)';
     }
   }
-
-  // Load Stripe.js
-  const stripeScript = document.createElement('script');
-  stripeScript.src = 'https://js.stripe.com/v3/';
-  document.head.appendChild(stripeScript);
 </script>
 </body>
 </html>
