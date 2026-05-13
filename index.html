@@ -309,7 +309,21 @@
 
 <!-- NAV -->
 <nav>
-  <a href="#" class="nav-logo">Kezia Babu</a>
+  <a href="#" class="nav-logo" style="display:flex;align-items:center;gap:0.5rem;">
+    <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="16" cy="16" r="16" fill="#f9e8ec"/>
+      <!-- lotus petals -->
+      <ellipse cx="16" cy="11" rx="3" ry="5.5" fill="#e8a0b4" opacity="0.85" transform="rotate(0 16 16)"/>
+      <ellipse cx="16" cy="11" rx="3" ry="5.5" fill="#c06080" opacity="0.6" transform="rotate(60 16 16)"/>
+      <ellipse cx="16" cy="11" rx="3" ry="5.5" fill="#e8a0b4" opacity="0.85" transform="rotate(120 16 16)"/>
+      <ellipse cx="16" cy="11" rx="3" ry="5.5" fill="#c06080" opacity="0.6" transform="rotate(180 16 16)"/>
+      <ellipse cx="16" cy="11" rx="3" ry="5.5" fill="#e8a0b4" opacity="0.85" transform="rotate(240 16 16)"/>
+      <ellipse cx="16" cy="11" rx="3" ry="5.5" fill="#c06080" opacity="0.6" transform="rotate(300 16 16)"/>
+      <circle cx="16" cy="16" r="4" fill="#fdf8f2"/>
+      <circle cx="16" cy="16" r="2.5" fill="#e8a0b4"/>
+    </svg>
+    Kezia Babu
+  </a>
   <div class="nav-links">
     <a href="#about">About</a>
     <a href="#services">Services</a>
@@ -673,7 +687,17 @@
 </div>
 
 <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 <script>
+  // =============================================
+  // EMAILJS CONFIG - Replace with your real keys
+  // =============================================
+  const EMAILJS_PUBLIC_KEY  = 'xb7Z3Ib5w9GzbI5mn';
+  const EMAILJS_SERVICE_ID  = 'service_cztws2l';
+  const EMAILJS_TEMPLATE_ID = 'template_brq7c1f';
+  // =============================================
+  emailjs.init(EMAILJS_PUBLIC_KEY);
+
   // Razorpay Key ID (public — safe to be here)
   const RAZORPAY_KEY_ID = 'rzp_test_SogRZP157ociEp';
 
@@ -730,16 +754,51 @@
     document.getElementById('sum-total').textContent = selectedAmount === 0 ? 'Free' : '₹'+selectedAmount.toLocaleString('en-IN');
   }
 
-  // Show confirmation after payment
+  // Show confirmation after payment + send email to Kezia
   function showConfirmation(paymentId) {
     const fname = document.getElementById('fname').value;
     const lname = document.getElementById('lname').value;
-    document.getElementById('conf-name').textContent = fname + ' ' + lname;
-    document.getElementById('conf-session').textContent = document.getElementById('sum-session').textContent;
-    document.getElementById('conf-date').textContent = document.getElementById('prefDate').value || 'To be confirmed';
-    document.getElementById('conf-format').textContent = document.getElementById('format').value || 'To be confirmed';
-    document.getElementById('conf-amount').textContent = selectedAmount === 0 ? 'Free' : '₹'+selectedAmount.toLocaleString('en-IN');
+    const email = document.getElementById('email').value;
+    const phone = document.getElementById('phone').value;
+    const session = document.getElementById('sum-session').textContent;
+    const date = document.getElementById('prefDate').value || 'To be confirmed';
+    const time = document.getElementById('prefTime').value || 'To be confirmed';
+    const format = document.getElementById('format').value || 'To be confirmed';
+    const notes = document.getElementById('notes').value || 'None';
+    const amount = selectedAmount === 0 ? 'Free' : '₹'+selectedAmount.toLocaleString('en-IN');
+    const fullName = fname + ' ' + lname;
+
+    document.getElementById('conf-name').textContent = fullName;
+    document.getElementById('conf-session').textContent = session;
+    document.getElementById('conf-date').textContent = date;
+    document.getElementById('conf-format').textContent = format;
+    document.getElementById('conf-amount').textContent = amount;
     showStep(3);
+
+    // Send email to Kezia via EmailJS
+    const templateParams = {
+      client_name:    fullName,
+      client_email:   email,
+      client_phone:   phone,
+      session_type:   session,
+      preferred_date: date,
+      preferred_time: time,
+      session_format: format,
+      amount_paid:    amount,
+      payment_id:     paymentId === 'free' ? 'Free Session' : paymentId,
+      client_notes:   notes
+    };
+
+    if (EMAILJS_PUBLIC_KEY !== 'YOUR_PUBLIC_KEY') {
+      emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, templateParams)
+        .then(function() {
+          console.log('Booking email sent to Kezia successfully!');
+        }, function(error) {
+          console.error('EmailJS error:', error);
+        });
+    } else {
+      console.log('EmailJS not configured yet. Booking details:', templateParams);
+    }
   }
 
   // Razorpay payment
